@@ -6,7 +6,7 @@ import math
 
 def idf(word, topic_counts):
     topics_that_used_word_count = sum([1 for topic in topic_counts if word in topic_counts[topic]])
-    return math.log10( len(topic_counts.keys()) / ponies_that_used_word_count )
+    return math.log10( len(topic_counts.keys()) / topics_that_used_word_count )
 
 
 def top_n_tf_idf(topic, topic_counts, n):

@@ -5,16 +5,27 @@ import json
 import argparse
 import string
 import re
+import sys, os
 from collections import Counter
+from pathlib import Path
 
+base_dir = Path(__file__).parent
+data_dir = base_dir.parent.parent / "data"
 
 def load_stop_words():
-    words = open("../data/stopwords.txt", "r").read().split("\n")
+    words = open(os.path.join(data_dir, "stopwords.txt"), "r").read().split("\n")
     r = re.compile(r'^#')
     return {word for word in words if not bool(r.match(word))}
 
 
-TOPICS = ["topic1", "topic2", "etc."]
+TOPICS = ["provaccine commentary", 
+        "provaccine analysis", 
+        "antivaccine commentary",
+        "antivaccine analysis",
+        "neutral commentary",
+        "neutral analysis",
+        "news"]
+
 PUNCTUATION = '()[],-.?!;:#&'
 MIN_COUNT = 5
 STOP_WORDS = load_stop_words()  
@@ -27,7 +38,7 @@ def load_data(path):
 
 
 def compile_word_counts(df): 
-    return {topic: word_counts(df[df.topic == topic]) for topic in TOPICS}
+    return {topic: word_counts(df[df.coding == topic]) for topic in TOPICS}
 
     
 def word_counts(df):
