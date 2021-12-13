@@ -19,9 +19,15 @@ Detailed usage instructions are contained in the help menus for each script. Ove
 
  The .json results are printed to stdout, which can be redirected to a .json file using a shell redirect
 
- Once manual annotation is complete, we can use `compile_word_counts.py` to produce our inital word frequency per topic .json counts file. This script also performs basic NLP preprocessing (stop word, punctuation, insignificant word removal):
+ Once manual annotation is complete, we can use `scripts/sanitize_annotations.sh` to automatically check that our coding and sentiment annotations do not have typos or noncompliant topics with those we defined. This script is invoked as follows:
+
+ `scripts/sanitize_annotations.sh`
+
+ Once manual annotation is verified, we can use `src/compile_word_counts.py` to produce our inital word frequency per topic .json counts file. This script also performs basic NLP preprocessing (stop word, punctuation, insignificant word removal):
 
 `python src/compile_word_counts -o <word_counts_json> -i <annotated_by_topic_tsv>`
+
+ Note that per the project requirements, *annotated_by_topic_tsv needs to include all 1000 tweets sampled, not just the 800 remaining after open coding*. In our experiment, we combined these .tsv files using standard shell tools (awk and cat). The resultant 1000 tweet file is contained in the data/analysis directory.
 
  Finally, we can compute the top 10 tf-idf words for each topic using the `compute_topic_top_n_tf-idf.py` script:
 
