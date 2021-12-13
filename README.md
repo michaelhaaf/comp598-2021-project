@@ -7,7 +7,7 @@ Detailed usage instructions are contained in the help menus for each script. Ove
 
 `python src/collect_tweets.py -o <output_file>`
 
- It produces a JSON file containing 1000 tweets curated from a 3 day window using the tweepy API (twitter API v2, paginated). 
+ It produces a JSON file containing 1000 tweets curated from a 3 day window using the tweepy API (twitter API v2, paginated). Note that in order to use this script, you will need a developer account with authentication to access this API, as well as .env environment variables containing your access credentials (so the scripts won't work out of the box, you need to set up your environment, but will work otherwise).
 
  To create .tsv files for manual annotation, `scripts/extract_to_tsv.py` is invoked with the following command:
 
